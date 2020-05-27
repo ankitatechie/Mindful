@@ -2,24 +2,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.message === "runSnow") {
     runSnow();
   }
-  if (request.message === "changeBackground") {
-    changeBackground();
-  }
 });
 
-function loadJS(src) {
-  // DOM: Create the script element
-  var jsElm = document.createElement("script");
-  // set the type attribute
-  jsElm.type = "application/javascript";
-  // make the script element load file
-  jsElm.src = src;
-  console.log(jsElm, "jsElm");
-  // finally insert the element to the body element in order to load the script
-  document.body.appendChild(jsElm);
-}
+function runSnow() {
+  var elem = document.createElement("div");
+  elem.setAttribute("id", "ThreeJS");
+  elem.style.cssText = "position: absolute; left:0px; top:0px";
+  document.body.appendChild(elem);
 
-function start() {
   var container, scene, camera, renderer;
   var clock = new THREE.Clock();
   // custom global variables
@@ -59,7 +49,7 @@ function start() {
 
     this.engine = new ParticleEngine();
     engine.setValues(Examples.snow);
-    engine.initialize();
+    engine.initialize(scene);
   }
 
   function animate() {
@@ -71,7 +61,7 @@ function start() {
   function restartEngine(parameters) {
     resetCamera();
 
-    engine.destroy();
+    engine.destroy(scene);
     engine = new ParticleEngine();
     engine.setValues(parameters);
     engine.initialize();
@@ -102,19 +92,4 @@ function start() {
   function render() {
     renderer.render(scene, camera);
   }
-}
-
-function runSnow() {
-  var elem = document.createElement("div");
-  elem.setAttribute("id", "ThreeJS");
-  elem.style.cssText = "position: absolute; left:0px; top:0px";
-  document.body.appendChild(elem);
-  start();
-}
-
-function changeBackground() {
-  var elem = document.createElement("div");
-  elem.style.cssText =
-    "position:absolute;width:100%;height:100%;opacity:1;z-index:100;background:red";
-  document.body.appendChild(elem);
 }
