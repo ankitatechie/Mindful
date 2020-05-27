@@ -2,20 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-'use strict';
+"use strict";
 
-let changeColor = document.getElementById('changeColor');
+let showSnow = document.getElementById("show-snow");
 
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
-
-changeColor.onclick = function(element) {
-  let color = element.target.value;
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {code: 'document.body.style.backgroundColor = "' + color + '";'});
+function addSnow() {
+  chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, { message: "runSnow" });
   });
-};
+}
+document.addEventListener("DOMContentLoaded", function() {
+  showSnow.addEventListener("click", addSnow);
+  // chrome.tabs.sendMessage(null, { message: "changeBackground" });
+});
