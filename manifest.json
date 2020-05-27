@@ -26,7 +26,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["contentScript.js", "particles/js/Three.js"]
+      "js": ["contentScript.js", "particles/js/snow.js"]
     }
   ],
   "web_accessible_resources": ["particles/*", "particles/images/*.png"]
