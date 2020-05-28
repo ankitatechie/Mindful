@@ -33,6 +33,7 @@
     "particles/*",
     "particles/images/*.png",
     "audios/*.mp3",
-    "particles/js/*.js"
+    "particles/js/*.js",
+    "particles/css/*.css"
   ]
 }

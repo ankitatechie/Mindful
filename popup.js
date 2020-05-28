@@ -1,13 +1,12 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 "use strict";
 
-function runAnimation(file) {
+function runAnimation(file, cssFileName = false) {
   chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
     var activeTab = tabs[0];
     chrome.tabs.executeScript(activeTab.id, { file });
+    if (cssFileName) {
+      chrome.tabs.insertCSS((activeTab.id, { file: cssFileName }));
+    }
   });
 }
 
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     runAnimation("particles/js/snow.js")
   );
   showRain.addEventListener("click", () =>
-    runAnimation("particles/js/rain.js")
+    runAnimation("particles/js/rain.js", "particles/css/rain.css")
   );
 
   playRainSound.addEventListener("click", () =>
