@@ -20,3 +20,19 @@ chrome.runtime.onInstalled.addListener(function() {
     ]);
   });
 });
+
+chrome.runtime.onMessage.addListener(function(request, sender) {
+  if (request.type == "playSound") {
+    const { file, play } = request.options;
+    playSound(file, play);
+  }
+});
+
+function playSound(file, play = true) {
+  var y = new Audio(file);
+  if (play) {
+    y.play();
+  } else {
+    y.pause();
+  }
+}
