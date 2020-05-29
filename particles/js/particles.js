@@ -1,23 +1,23 @@
 var container, scene, camera, renderer, elem, cube;
 var clock = new THREE.Clock();
 
-console.log(document.getElementById("ThreeJS"), "SNOW");
-if (document.getElementById("ThreeJS")) {
-  document.getElementById("ThreeJS").remove();
-}
-elem = document.createElement("div");
-elem.setAttribute("id", "ThreeJS");
-elem.style.cssText = "position: absolute; left:0px; top:0px";
-document.body.appendChild(elem);
-play();
-
-function play() {
-  init();
+function play(param) {
+  if (document.getElementById("ThreeJS")) {
+    document.getElementById("ThreeJS").remove();
+  }
+  elem = document.createElement("div");
+  elem.setAttribute("id", "ThreeJS");
+  elem.style.cssText = "position: absolute; left:0px; top:0px";
+  document.body.appendChild(elem);
+  init(param);
   animate();
 }
 
 // FUNCTIONS
-function init() {
+function init(param) {
+  if (restart) {
+    restartEngine(param);
+  }
   // SCENE
   scene = new THREE.Scene();
   // CAMERA
@@ -46,7 +46,7 @@ function init() {
   ////////////
 
   this.engine = new ParticleEngine();
-  engine.setValues(Examples.fireflies);
+  engine.setValues(Examples[param]);
   engine.initialize(scene);
 }
 
@@ -62,7 +62,7 @@ function restartEngine(parameters) {
   engine.destroy(scene);
   engine = new ParticleEngine();
   engine.setValues(parameters);
-  engine.initialize();
+  engine.initialize(scene);
 }
 
 function resetCamera() {

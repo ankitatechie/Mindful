@@ -15,7 +15,8 @@ const data = [
     graphic: {
       btnId: "show-rain",
       eventName: "toggleGraphic",
-      file: "particles/js/rain.js"
+      file: "particles/js/rain.js",
+      cssFile: "particles/css/rain.css"
     }
   },
   {
@@ -28,7 +29,7 @@ const data = [
     graphic: {
       btnId: "show-snow",
       eventName: "toggleGraphic",
-      file: "particles/js/snow.js"
+      file: "particles/js/particles.js"
     }
   },
   {
@@ -77,15 +78,20 @@ const data = [
     graphic: {
       btnId: "show-fireflies",
       eventName: "toggleGraphic",
-      file: "particles/js/fireflies.js"
+      file: "particles/js/particles.js"
     }
   }
 ];
 
-function runAnimation(file) {
+function runAnimation(file, name, cssFile) {
   chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
     var activeTab = tabs[0];
-    chrome.tabs.executeScript(activeTab.id, { file });
+    chrome.tabs.executeScript(activeTab.id, { file }, () => {
+      chrome.tabs.sendMessage(activeTab.id, { name });
+    });
+    if (cssFile) {
+      chrome.tabs.insertCSS((activeTab.id, { file: cssFile }));
+    }
   });
 }
 
@@ -111,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (graphicBtn) {
       graphicBtn.addEventListener("click", e => {
-        runAnimation(obj.graphic.file);
+        runAnimation(obj.graphic.file, obj.name, obj.graphic.cssFile);
       });
     }
   }

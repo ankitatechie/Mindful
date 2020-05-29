@@ -78,6 +78,3 @@ var makeItRain = function() {
   document.getElementsByClassName("front-row")[0].innerHTML = drops;
   document.getElementsByClassName("back-row")[0].innerHTML = backDrops;
 };
-
-createRain();
-makeItRain();
