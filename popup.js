@@ -1,3 +1,7 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 "use strict";
 
 const data = [
@@ -6,13 +10,12 @@ const data = [
     audio: {
       btnId: "play-rain",
       eventName: "toggleAudio",
-      file: "audios/rain.mp3"
+      file: "audio/rain.mp3"
     },
     graphic: {
       btnId: "show-rain",
       eventName: "toggleGraphic",
-      file: "particles/js/rain.js",
-      cssFile: "particles/css/rain.css"
+      file: "particles/js/rain.js"
     }
   },
   {
@@ -20,7 +23,7 @@ const data = [
     audio: {
       btnId: "play-snow",
       eventName: "toggleAudio",
-      file: "audios/snow.mp3"
+      file: "audio/snow.mp3"
     },
     graphic: {
       btnId: "show-snow",
@@ -33,7 +36,7 @@ const data = [
     audio: {
       btnId: "play-stars",
       eventName: "toggleAudio",
-      file: "audios/snow.mp3"
+      file: "audio/snow.mp3"
     },
     graphic: {
       btnId: "show-stars",
@@ -45,7 +48,7 @@ const data = [
     audio: {
       btnId: "play-om",
       eventName: "toggleAudio",
-      file: "audios/om.mp3"
+      file: "audio/om.mp3"
     },
     graphic: {
       btnId: "show-om",
@@ -57,22 +60,32 @@ const data = [
     audio: {
       btnId: "play-piano",
       eventName: "toggleAudio",
-      file: "audios/piano.mp3"
+      file: "audio/piano.mp3"
     },
     graphic: {
       btnId: "show-piano",
       eventName: "toggleGraphic"
     }
+  },
+  {
+    name: "fireflies",
+    audio: {
+      btnId: "play-fireflies",
+      eventName: "toggleAudio",
+      file: "audios/snow.mp3"
+    },
+    graphic: {
+      btnId: "show-fireflies",
+      eventName: "toggleGraphic",
+      file: "particles/js/fireflies.js"
+    }
   }
 ];
 
-function runAnimation(file, cssFile = false) {
+function runAnimation(file) {
   chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
     var activeTab = tabs[0];
     chrome.tabs.executeScript(activeTab.id, { file });
-    if (cssFile) {
-      chrome.tabs.insertCSS((activeTab.id, { file: cssFile }));
-    }
   });
 }
 
@@ -98,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (graphicBtn) {
       graphicBtn.addEventListener("click", e => {
-        runAnimation(obj.graphic.file, obj.graphic.cssFile);
+        runAnimation(obj.graphic.file);
       });
     }
   }

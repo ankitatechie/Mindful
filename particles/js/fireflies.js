@@ -46,7 +46,7 @@ function init() {
   ////////////
 
   this.engine = new ParticleEngine();
-  engine.setValues(Examples.snow);
+  engine.setValues(Examples.fireflies);
   engine.initialize(scene);
 }
 
