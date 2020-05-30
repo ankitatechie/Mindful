@@ -46,7 +46,7 @@ var makeItRain = function() {
       randoHundo +
       "s; animation-duration: 0.5" +
       randoHundo +
-      's;"><div class="stem" style="animation-delay: 0.' +
+      's;"><div class="drop-stem" style="animation-delay: 0.' +
       randoHundo +
       "s; animation-duration: 0.5" +
       randoHundo +
@@ -64,7 +64,7 @@ var makeItRain = function() {
       randoHundo +
       "s; animation-duration: 0.5" +
       randoHundo +
-      's;"><div class="stem" style="animation-delay: 0.' +
+      's;"><div class="drop-stem" style="animation-delay: 0.' +
       randoHundo +
       "s; animation-duration: 0.5" +
       randoHundo +
