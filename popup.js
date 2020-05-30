@@ -1,3 +1,7 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 "use strict";
 
 const data = [
@@ -21,7 +25,7 @@ const data = [
     },
     graphic: {
       btnId: "show-snow",
-      file: "particles/js/snow.js"
+      file: "particles/js/particles.js"
     }
   },
   {
@@ -53,15 +57,28 @@ const data = [
     graphic: {
       btnId: "show-piano"
     }
+  },
+  {
+    name: "fireflies",
+    audio: {
+      btnId: "play-fireflies",
+      file: "audios/snow.mp3"
+    },
+    graphic: {
+      btnId: "show-fireflies",
+      file: "particles/js/particles.js"
+    }
   }
 ];
 
 var currentAudio = null;
 
-function runAnimation(file, cssFile = false) {
+function runAnimation(file, name, cssFile) {
   chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
     var activeTab = tabs[0];
-    chrome.tabs.executeScript(activeTab.id, { file });
+    chrome.tabs.executeScript(activeTab.id, { file }, () => {
+      chrome.tabs.sendMessage(activeTab.id, { name });
+    });
     if (cssFile) {
       chrome.tabs.insertCSS((activeTab.id, { file: cssFile }));
     }
@@ -112,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (graphicBtn) {
       graphicBtn.addEventListener("click", e => {
-        runAnimation(obj.graphic.file, obj.graphic.cssFile);
+        runAnimation(obj.graphic.file, obj.name, obj.graphic.cssFile);
       });
     }
   }

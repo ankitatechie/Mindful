@@ -12,7 +12,7 @@ div#rain {
   bottom: 0;
   margin: auto;
   overflow: hidden;
-  background: #000000;
+  background: transparent;
 }
 
 .rain {
