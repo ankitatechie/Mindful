@@ -25701,7 +25701,7 @@ THREE.WebGLRenderer = function ( parameters ) {
 
 			if ( texture.generateMipmaps && isImagePowerOfTwo ) _gl.generateMipmap( _gl.TEXTURE_2D );
 
-			texture.needsUpdate = false;
+			texture.needsUpdate = true;
 
 			if ( texture.onUpdate ) texture.onUpdate();
 

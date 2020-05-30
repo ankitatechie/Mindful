@@ -15,9 +15,6 @@ function play(param) {
 
 // FUNCTIONS
 function init(param) {
-  if (restart) {
-    restartEngine(param);
-  }
   // SCENE
   scene = new THREE.Scene();
   // CAMERA
