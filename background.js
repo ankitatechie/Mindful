@@ -4,6 +4,9 @@
 
 "use strict";
 
+let audioClip = null;
+let isSoundPlaying = false;
+
 chrome.runtime.onInstalled.addListener(function() {
   console.log("Extension is ready to use!");
 
@@ -22,17 +25,37 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (request.type == "playSound") {
-    const { file, play } = request.options;
-    playSound(file, play);
+  if (request.type == "toggleSound") {
+    console.log("audioClip", audioClip);
+    const { file } = request.options;
+    playSound(file);
   }
 });
 
-function playSound(file, play = true) {
-  var y = new Audio(file);
-  if (play) {
-    y.play();
-  } else {
-    y.pause();
+function playSound(file) {
+  if (audioClip) {
+    audioClip.pause();
+
+    // stop the same audio playing
+    if (audioClip.src === file && isSoundPlaying == true) {
+      isSoundPlaying = false;
+      chrome.storage.sync.set({ isSoundPlaying: false });
+      return;
+    }
   }
+
+  audioClip = new Audio(file);
+  audioClip.loop = true;
+  audioClip.play();
+  isSoundPlaying = true;
+  chrome.storage.sync.set({ isSoundPlaying: true });
+
+  // gapless looping of audio
+  audioClip.addEventListener("timeupdate", () => {
+    const buffer = 0.44;
+    if (audioClip.currentTime > audioClip.duration - buffer) {
+      audioClip.currentTime = 0;
+      audioClip.play();
+    }
+  });
 }

@@ -5,12 +5,10 @@ const data = [
     name: "rain",
     audio: {
       btnId: "play-rain",
-      eventName: "toggleAudio",
       file: "audios/rain.mp3"
     },
     graphic: {
       btnId: "show-rain",
-      eventName: "toggleGraphic",
       file: "particles/js/rain.js",
       cssFile: "particles/css/rain.css"
     }
@@ -19,12 +17,10 @@ const data = [
     name: "snow",
     audio: {
       btnId: "play-snow",
-      eventName: "toggleAudio",
       file: "audios/snow.mp3"
     },
     graphic: {
       btnId: "show-snow",
-      eventName: "toggleGraphic",
       file: "particles/js/snow.js"
     }
   },
@@ -32,39 +28,35 @@ const data = [
     name: "stars",
     audio: {
       btnId: "play-stars",
-      eventName: "toggleAudio",
       file: "audios/snow.mp3"
     },
     graphic: {
-      btnId: "show-stars",
-      eventName: "toggleGraphic"
+      btnId: "show-stars"
     }
   },
   {
     name: "om",
     audio: {
       btnId: "play-om",
-      eventName: "toggleAudio",
       file: "audios/om.mp3"
     },
     graphic: {
-      btnId: "show-om",
-      eventName: "toggleGraphic"
+      btnId: "show-om"
     }
   },
   {
     name: "piano",
     audio: {
       btnId: "play-piano",
-      eventName: "toggleAudio",
       file: "audios/piano.mp3"
     },
     graphic: {
-      btnId: "show-piano",
-      eventName: "toggleGraphic"
+      btnId: "show-piano"
     }
   }
 ];
+
+var currentAudio = null;
 
 function runAnimation(file, cssFile = false) {
   chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
@@ -76,12 +68,23 @@ function runAnimation(file, cssFile = false) {
   });
 }
 
-function playSound(file, play = true) {
+function togglePlayBtn(playBtn) {
+  if (playBtn.classList.length === 1) {
+    playBtn.className = "play-btn stop-btn";
+  } else {
+    chrome.storage.sync.set({ audioClip: currentAudio });
+    playBtn.className = "play-btn";
+  }
+}
+
+function playSound(file, playBtn) {
+  // toggle play and stop button when popup is already in open state
+  togglePlayBtn(playBtn);
+
   chrome.runtime.sendMessage({
-    type: "playSound",
+    type: "toggleSound",
     options: {
-      file: file,
-      play: play
+      file: file
     }
   });
 }
@@ -91,8 +94,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const playBtn = document.getElementById(obj.audio.btnId);
     const graphicBtn = document.getElementById(obj.graphic.btnId);
     if (playBtn) {
+      // when popup renders first time, check which sound is already playing
+      // and then show stop button accordingly
+      chrome.storage.sync.get(["audioClip", "isSoundPlaying"], function(
+        result
+      ) {
+        if (result.audioClip === obj.audio.file && result.isSoundPlaying) {
+          togglePlayBtn(playBtn);
+        }
+      });
+
       playBtn.addEventListener("click", e => {
-        playSound(chrome.runtime.getURL(obj.audio.file), true);
+        currentAudio = obj.audio.file;
+        playSound(chrome.runtime.getURL(obj.audio.file), playBtn);
       });
     }
 
