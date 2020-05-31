@@ -7,7 +7,7 @@ function play(param) {
   }
   elem = document.createElement("div");
   elem.setAttribute("id", "ThreeJS");
-  elem.style.cssText = "position: absolute; left:0px; top:0px";
+  elem.style.cssText = "position: fixed; left:0px; top:0px; z-index: 1";
   document.body.appendChild(elem);
   init(param);
   animate();

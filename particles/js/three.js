@@ -37551,22 +37551,22 @@ Examples =
 		positionSpread   : new THREE.Vector3( 500, 0, 500 ),
 		
 		velocityStyle    : Type.CUBE,
-		velocityBase     : new THREE.Vector3( 0, -60, 0 ),
+		velocityBase     : new THREE.Vector3( 0, -30, 0 ),
 		velocitySpread   : new THREE.Vector3( 50, 20, 50 ), 
-		accelerationBase : new THREE.Vector3( 0, -10,0 ),
+		accelerationBase : new THREE.Vector3( 0, -5,0 ),
 		
 		angleBase               : 0,
 		angleSpread             : 720,
 		angleVelocityBase       :  0,
 		angleVelocitySpread     : 60,
 		
-		particleTexture : THREE.ImageUtils.loadTexture( chrome.runtime.getURL('particles/images/snowflake.png') ),
+		particleTexture : THREE.ImageUtils.loadTexture( chrome.runtime.getURL('particles/images/snow.png') ),
 			
-		sizeTween    : new Tween( [0, 0.25], [1, 10] ),
+		sizeTween    : new Tween( [0, 0.1], [1, 10] ),
 		colorBase: new THREE.Vector3(0.66, 1.0, 0.9), // H,S,L
-		opacityTween : new Tween( [2, 3], [0.8, 0] ),
+		opacityTween : new Tween( [2, 3], [0.8, 0.6] ),
 
-		particlesPerSecond : 200,
+		particlesPerSecond : 70,
 		particleDeathAge   : 4.0,		
 		emitterDeathAge    : 60
 	},
