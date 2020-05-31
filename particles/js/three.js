@@ -37583,7 +37583,7 @@ Examples =
 		
 		particleTexture : THREE.ImageUtils.loadTexture( chrome.runtime.getURL('particles/images/spark.png') ),
 
-		sizeBase   : 30.0,
+		sizeBase   : 20.0,
 		sizeSpread : 2.0,
 		opacityTween : new Tween([0.0, 1.0, 1.1, 2.0, 2.1, 3.0, 3.1, 4.0, 4.1, 5.0, 5.1, 6.0, 6.1],
 		                         [0.2, 0.2, 1.0, 1.0, 0.2, 0.2, 1.0, 1.0, 0.2, 0.2, 1.0, 1.0, 0.2] ),				
