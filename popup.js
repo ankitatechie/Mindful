@@ -32,10 +32,21 @@ const data = [
     name: "stars",
     audio: {
       btnId: "play-stars",
-      file: "audios/snow.mp3"
+      file: "audios/night.mp3"
     },
     graphic: {
       btnId: "show-stars"
+    }
+  },
+  {
+    name: "fireflies",
+    audio: {
+      btnId: "play-fireflies",
+      file: "audios/fireflies.mp3"
+    },
+    graphic: {
+      btnId: "show-fireflies",
+      file: "particles/js/particles.js"
     }
   },
   {
@@ -59,14 +70,23 @@ const data = [
     }
   },
   {
-    name: "fireflies",
+    name: "flute",
     audio: {
-      btnId: "play-fireflies",
+      btnId: "play-flute",
       file: "audios/snow.mp3"
     },
     graphic: {
-      btnId: "show-fireflies",
-      file: "particles/js/particles.js"
+      btnId: "show-flute",
+    }
+  },
+  {
+    name: "chakra",
+    audio: {
+      btnId: "play-chakra",
+      file: "audios/bowl.mp3"
+    },
+    graphic: {
+      btnId: "show-chakra",
     }
   }
 ];
