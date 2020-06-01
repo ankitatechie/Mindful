@@ -73,7 +73,7 @@ const data = [
     name: "flute",
     audio: {
       btnId: "play-flute",
-      file: "audios/snow.mp3"
+      file: "audios/flute.mp3"
     },
     graphic: {
       btnId: "show-flute",
