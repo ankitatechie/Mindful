@@ -29,6 +29,9 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     const { file } = request.options;
     playSound(file);
   }
+  if (request.type == "log") {
+    console.log(request.options.message, "------->");
+  }
 });
 
 function playSound(file) {

@@ -93,7 +93,8 @@ const data = [
 
 function openTab(name) {
   chrome.tabs.create({
-    url: chrome.extension.getURL(`particles/html/${name}.html`)
+    url: chrome.extension.getURL(`particles/html/${name}.html`),
+    active: true
   });
 }
 
