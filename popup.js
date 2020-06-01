@@ -90,9 +90,19 @@ function togglePlayBtn(playBtn, currentAudio) {
   }
 }
 
+function pausePlayBtn(playBtn) {
+  for (let obj of data) {
+    const _playBtn = document.getElementById(obj.audio.btnId);
+    if (obj.audio.btnId !== playBtn.id) {
+      _playBtn.className = "play-btn";
+    }
+  }
+}
+
 function playSound(file, playBtn, currentAudio) {
   // toggle play and stop button when popup is already in open state
   togglePlayBtn(playBtn, currentAudio);
+  pausePlayBtn(playBtn);
   chrome.runtime.sendMessage({
     type: "toggleSound",
     options: {
