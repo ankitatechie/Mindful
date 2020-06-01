@@ -29,6 +29,7 @@
       "js": ["contentScript.js", "particles/js/three.js"]
     }
   ],
+  "content_security_policy": "script-src 'self' https://use.fontawesome.com/a8c1460c14.js; object-src 'self' ",
   "web_accessible_resources": [
     "particles/*",
     "particles/images/*.png",

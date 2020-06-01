@@ -87,3 +87,5 @@ function update() {
 function render() {
   renderer.render(scene, camera);
 }
+
+play("snow");

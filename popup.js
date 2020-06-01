@@ -32,7 +32,7 @@ const data = [
     name: "stars",
     audio: {
       btnId: "play-stars",
-      file: "audios/snow.mp3"
+      file: "audios/stars.mp3"
     },
     graphic: {
       btnId: "show-stars"
@@ -62,7 +62,7 @@ const data = [
     name: "fireflies",
     audio: {
       btnId: "play-fireflies",
-      file: "audios/snow.mp3"
+      file: "audios/fireflies.mp3"
     },
     graphic: {
       btnId: "show-fireflies",
@@ -71,33 +71,28 @@ const data = [
   }
 ];
 
-var currentAudio = null;
-
-function runAnimation(file, name, cssFile) {
-  chrome.tabs.query({ currentWindow: true, active: true }, function(tabs) {
-    var activeTab = tabs[0];
-    chrome.tabs.executeScript(activeTab.id, { file }, () => {
-      chrome.tabs.sendMessage(activeTab.id, { name });
-    });
-    if (cssFile) {
-      chrome.tabs.insertCSS((activeTab.id, { file: cssFile }));
-    }
+function openTab(name) {
+  chrome.tabs.create({
+    url: chrome.extension.getURL(`particles/html/${name}.html`)
   });
 }
 
-function togglePlayBtn(playBtn) {
+function togglePlayBtn(playBtn, currentAudio) {
   if (playBtn.classList.length === 1) {
+    // sound was in playing state, it will switch icon to pause mode
+    if (currentAudio) {
+      chrome.storage.sync.set({ audioClip: currentAudio });
+    }
     playBtn.className = "play-btn stop-btn";
   } else {
-    chrome.storage.sync.set({ audioClip: currentAudio });
+    // sound was in pasue state, it will switch icon to play mode
     playBtn.className = "play-btn";
   }
 }
 
-function playSound(file, playBtn) {
+function playSound(file, playBtn, currentAudio) {
   // toggle play and stop button when popup is already in open state
-  togglePlayBtn(playBtn);
-
+  togglePlayBtn(playBtn, currentAudio);
   chrome.runtime.sendMessage({
     type: "toggleSound",
     options: {
@@ -107,6 +102,7 @@ function playSound(file, playBtn) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  var currentAudio = null;
   for (let obj of data) {
     const playBtn = document.getElementById(obj.audio.btnId);
     const graphicBtn = document.getElementById(obj.graphic.btnId);
@@ -123,13 +119,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
       playBtn.addEventListener("click", e => {
         currentAudio = obj.audio.file;
-        playSound(chrome.runtime.getURL(obj.audio.file), playBtn);
+        playSound(chrome.runtime.getURL(obj.audio.file), playBtn, currentAudio);
       });
     }
 
     if (graphicBtn) {
-      graphicBtn.addEventListener("click", e => {
-        runAnimation(obj.graphic.file, obj.name, obj.graphic.cssFile);
+      graphicBtn.addEventListener("click", () => {
+        openTab(obj.name);
       });
     }
   }

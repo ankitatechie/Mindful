@@ -33,6 +33,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 });
 
 function playSound(file) {
+  console.log(audioClip, "AudioClip");
   if (audioClip) {
     audioClip.pause();
 
@@ -59,3 +60,9 @@ function playSound(file) {
     }
   });
 }
+
+// when browser is closed reset the state
+chrome.windows.onRemoved.addListener(function(windowId) {
+  audioClip.pause();
+  chrome.storage.sync.clear();
+});
