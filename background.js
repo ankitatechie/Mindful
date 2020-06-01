@@ -26,7 +26,6 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.type == "toggleSound") {
-    console.log("audioClip", audioClip);
     const { file } = request.options;
     playSound(file);
   }
@@ -59,3 +58,8 @@ function playSound(file) {
     }
   });
 }
+
+chrome.windows.onRemoved.addListener(function() {
+  audioClip.pause();
+  chrome.storage.sync.clear();
+});
