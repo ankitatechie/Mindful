@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (graphicBtn) {
       graphicBtn.addEventListener("click", function() {
+        playBtn.click();
         openTab(obj.name);
       });
     }
