@@ -37574,23 +37574,23 @@ Examples =
 	fireflies :
 	{
 		positionStyle  : Type.CUBE,
-		positionBase   : new THREE.Vector3( 0, 100, 0 ),
-		positionSpread : new THREE.Vector3( 400, 200, 400 ),
+		positionBase   : new THREE.Vector3( 0, 0, 0 ),
+		positionSpread : new THREE.Vector3( 400, 400, 300 ),
 
 		velocityStyle  : Type.CUBE,
 		velocityBase   : new THREE.Vector3( 0, 0, 0 ),
-		velocitySpread : new THREE.Vector3( 60, 20, 60 ), 
+		velocitySpread : new THREE.Vector3( 70, 20, 70 ), 
 		
 		particleTexture : THREE.ImageUtils.loadTexture( chrome.runtime.getURL('particles/images/spark.png') ),
 
-		sizeBase   : 20.0,
-		sizeSpread : 2.0,
+		sizeBase   : 30.0,
+		sizeSpread : 3.0,
 		opacityTween : new Tween([0.0, 1.0, 1.1, 2.0, 2.1, 3.0, 3.1, 4.0, 4.1, 5.0, 5.1, 6.0, 6.1],
 		                         [0.2, 0.2, 1.0, 1.0, 0.2, 0.2, 1.0, 1.0, 0.2, 0.2, 1.0, 1.0, 0.2] ),				
-		colorBase   : new THREE.Vector3(0.30, 1.0, 0.6), // H,S,L
+		colorBase   : new THREE.Vector3(0.20, 3.0, 0.5), // H,S,L
 		colorSpread : new THREE.Vector3(0.3, 0.0, 0.0),
 
-		particlesPerSecond : 20,
+		particlesPerSecond : 150,
 		particleDeathAge   : 6.1,		
 		emitterDeathAge    : 600
 	},
