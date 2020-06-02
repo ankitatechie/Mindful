@@ -2,7 +2,7 @@
   "name": "Mindful",
   "version": "1.0",
   "description": "Calm your mind while in work mode",
-  "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
+  "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
