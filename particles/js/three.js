@@ -37547,7 +37547,7 @@ Examples =
 	snow :
 	{
 		positionStyle    : Type.CUBE,
-		positionBase     : new THREE.Vector3( 0, 200, 0 ),
+		positionBase     : new THREE.Vector3( 0, 200, 100 ),
 		positionSpread   : new THREE.Vector3( 500, 0, 500 ),
 		
 		velocityStyle    : Type.CUBE,
@@ -37562,11 +37562,11 @@ Examples =
 		
 		particleTexture : THREE.ImageUtils.loadTexture( chrome.runtime.getURL('particles/images/snow.png') ),
 			
-		sizeTween    : new Tween( [0, 0.1], [1, 10] ),
+		sizeTween    : new Tween( [0, 1], [1, 10] ),
 		colorBase: new THREE.Vector3(0.66, 1.0, 0.9), // H,S,L
 		opacityTween : new Tween( [2, 3], [0.8, 0.6] ),
 
-		particlesPerSecond : 70,
+		particlesPerSecond : 250,
 		particleDeathAge   : 4.0,		
 		emitterDeathAge    : 60
 	},
