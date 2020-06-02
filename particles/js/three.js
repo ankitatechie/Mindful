@@ -37566,7 +37566,7 @@ Examples =
 		colorBase: new THREE.Vector3(0.66, 1.0, 0.9), // H,S,L
 		opacityTween : new Tween( [2, 3], [0.8, 0.6] ),
 
-		particlesPerSecond : 250,
+		particlesPerSecond : 500,
 		particleDeathAge   : 4.0,		
 		emitterDeathAge    : 60
 	},
