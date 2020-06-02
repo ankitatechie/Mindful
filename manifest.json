@@ -2,7 +2,7 @@
   "name": "Mindful",
   "version": "1.0",
   "description": "Calm your mind while in work mode",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "storage"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
@@ -26,7 +26,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["contentScript.js", "particles/js/three.js"]
+      "js": ["particles/js/three.js"]
     }
   ],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
