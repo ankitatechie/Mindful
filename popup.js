@@ -93,7 +93,8 @@ const data = [
 
 function openTab(name) {
   chrome.tabs.create({
-    url: chrome.extension.getURL(`particles/html/${name}.html`)
+    url: chrome.extension.getURL(`particles/html/${name}.html`),
+    active: true
   });
 }
 
@@ -110,7 +111,8 @@ function togglePlayBtn(playBtn, currentAudio) {
   }
 }
 
-function pausePlayBtn(playBtn) {
+// pause all the non active buttons
+function pauseAllBtn(playBtn) {
   for (let obj of data) {
     const _playBtn = document.getElementById(obj.audio.btnId);
     if (obj.audio.btnId !== playBtn.id) {
@@ -122,7 +124,7 @@ function pausePlayBtn(playBtn) {
 function playSound(file, playBtn, currentAudio) {
   // toggle play and stop button when popup is already in open state
   togglePlayBtn(playBtn, currentAudio);
-  pausePlayBtn(playBtn);
+  pauseAllBtn(playBtn);
   chrome.runtime.sendMessage({
     type: "toggleSound",
     options: {
@@ -147,14 +149,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
 
-      playBtn.addEventListener("click", e => {
+      playBtn.addEventListener("click", function() {
         currentAudio = obj.audio.file;
         playSound(chrome.runtime.getURL(obj.audio.file), playBtn, currentAudio);
       });
     }
 
     if (graphicBtn) {
-      graphicBtn.addEventListener("click", () => {
+      graphicBtn.addEventListener("click", function() {
         openTab(obj.name);
       });
     }

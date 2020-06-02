@@ -7,31 +7,14 @@
 let audioClip = null;
 let isSoundPlaying = false;
 
-chrome.runtime.onInstalled.addListener(function() {
-  console.log("Extension is ready to use!");
-
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    chrome.declarativeContent.onPageChanged.addRules([
-      {
-        conditions: [
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostEquals: "developer.chrome.com" }
-          })
-        ],
-        actions: [new chrome.declarativeContent.ShowPageAction()]
-      }
-    ]);
-  });
-});
-
 chrome.runtime.onMessage.addListener(function(request, sender) {
   if (request.type == "toggleSound") {
     const { file } = request.options;
-    playSound(file);
+    playBackgroundSound(file);
   }
 });
 
-function playSound(file) {
+function playBackgroundSound(file) {
   if (audioClip) {
     audioClip.pause();
 
