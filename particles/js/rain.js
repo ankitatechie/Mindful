@@ -44,15 +44,15 @@ var makeItRain = function() {
       (randoFiver + randoFiver - 1 + 100) +
       "%; animation-delay: 0." +
       randoHundo +
-      "s; animation-duration: 0.5" +
+      "s; animation-duration: 0.8" +
       randoHundo +
       's;"><div class="drop-stem" style="animation-delay: 0.' +
       randoHundo +
-      "s; animation-duration: 0.5" +
+      "s; animation-duration: 0.8" +
       randoHundo +
       's;"></div><div class="splat" style="animation-delay: 0.' +
       randoHundo +
-      "s; animation-duration: 0.5" +
+      "s; animation-duration: 0.8" +
       randoHundo +
       's;"></div></div>';
     backDrops +=
@@ -62,15 +62,15 @@ var makeItRain = function() {
       (randoFiver + randoFiver - 1 + 100) +
       "%; animation-delay: 0." +
       randoHundo +
-      "s; animation-duration: 0.5" +
+      "s; animation-duration: 0.8" +
       randoHundo +
       's;"><div class="drop-stem" style="animation-delay: 0.' +
       randoHundo +
-      "s; animation-duration: 0.5" +
+      "s; animation-duration: 0.8" +
       randoHundo +
       's;"></div><div class="splat" style="animation-delay: 0.' +
       randoHundo +
-      "s; animation-duration: 0.5" +
+      "s; animation-duration: 0.8" +
       randoHundo +
       's;"></div></div>';
   }
