@@ -1,7 +1,7 @@
 {
   "name": "Mindful",
-  "version": "1.0",
-  "description": "Calm your mind while in work mode",
+  "version": "1.0.2",
+  "description": "Musical tones & visuals too improve focus and boost productivity",
   "permissions": ["activeTab", "storage"],
   "background": {
     "scripts": ["background.js"],
