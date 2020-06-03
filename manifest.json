@@ -23,12 +23,7 @@
     "128": "images/logo_128.png"
   },
   "manifest_version": 2,
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["particles/js/three.js"]
-    }
-  ],
+
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "web_accessible_resources": [
     "particles/*",
