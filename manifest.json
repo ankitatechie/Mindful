@@ -1,7 +1,7 @@
 {
   "name": "Mindful",
   "version": "1.0.2",
-  "description": "Musical tones & visuals too improve focus and boost productivity",
+  "description": "Musical tones & animated visuals to improve focus and boost productivity",
   "permissions": ["activeTab", "storage"],
   "background": {
     "scripts": ["background.js"],
