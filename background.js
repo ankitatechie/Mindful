@@ -50,6 +50,18 @@ function playBackgroundSound(file) {
       lastPlayedFile: audioClip.currentSrc
     });
   });
+
+  audioClip.addEventListener("error", e => {
+    console.log(e);
+  });
+
+  audioClip.addEventListener("ended", () => {
+    console.log("Audio Has ended");
+  });
+
+  audioClip.addEventListener("abort", () => {
+    console.log("Audio has been aborted");
+  });
 }
 
 chrome.windows.onRemoved.addListener(function() {
