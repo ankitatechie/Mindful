@@ -1,20 +1,18 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 "use strict";
 
 let audioClip = null;
 let isSoundPlaying = false;
+let lastPlayedFile = null;
 
-chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (request.type == "toggleSound") {
-    const { file } = request.options;
-    playBackgroundSound(file);
-  }
-});
+function openTab(name) {
+  chrome.tabs.create({
+    url: chrome.extension.getURL(`particles/html/${name}.html`),
+    active: true
+  });
+}
 
 function playBackgroundSound(file) {
+  lastPlayedFile = file;
   if (audioClip) {
     audioClip.pause();
 
@@ -25,7 +23,6 @@ function playBackgroundSound(file) {
       return;
     }
   }
-
   audioClip = new Audio(file);
   audioClip.loop = true;
   audioClip.play();
@@ -40,9 +37,39 @@ function playBackgroundSound(file) {
       audioClip.play();
     }
   });
+
+  audioClip.addEventListener("pause", () => {
+    chrome.storage.sync.set({ isSoundPlaying: false });
+    chrome.runtime.sendMessage({
+      type: "PAUSE_BUTTON",
+      lastPlayedFile
+    });
+  });
+  audioClip.addEventListener("play", () => {
+    chrome.storage.sync.set({ isSoundPlaying: true });
+    chrome.runtime.sendMessage({
+      type: "PLAY_BUTTON",
+      lastPlayedFile
+    });
+  });
 }
 
 chrome.windows.onRemoved.addListener(function() {
   audioClip.pause();
   chrome.storage.sync.clear();
+});
+
+chrome.runtime.onMessage.addListener(function(request) {
+  switch (request.type) {
+    case "OPEN_TAB":
+      openTab(request.name);
+      break;
+    case "PLAY_SOUND":
+      {
+        playBackgroundSound(request.file);
+      }
+      break;
+    default:
+      break;
+  }
 });
