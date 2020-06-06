@@ -87,7 +87,7 @@ function togglePlayBtn(playBtn, file, currentAudio) {
     onPlay(playBtn, file, currentAudio);
   } else {
     changePlayBtnClass(playBtn, "play-btn");
-    playSound("PAUSE_SOUND", file);
+    playSound("PLAY_SOUND", file);
   }
 }
 

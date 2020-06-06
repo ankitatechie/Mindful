@@ -2,7 +2,6 @@
 
 let audioClip = null;
 let isSoundPlaying = false;
-let lastPlayedFile = null;
 
 function openTab(name) {
   chrome.tabs.create({
@@ -12,7 +11,6 @@ function openTab(name) {
 }
 
 function playBackgroundSound(file) {
-  lastPlayedFile = file;
   if (audioClip) {
     audioClip.pause();
 
@@ -42,14 +40,14 @@ function playBackgroundSound(file) {
     chrome.storage.sync.set({ isSoundPlaying: false });
     chrome.runtime.sendMessage({
       type: "PAUSE_BUTTON",
-      lastPlayedFile
+      lastPlayedFile: audioClip.currentSrc
     });
   });
   audioClip.addEventListener("play", () => {
     chrome.storage.sync.set({ isSoundPlaying: true });
     chrome.runtime.sendMessage({
       type: "PLAY_BUTTON",
-      lastPlayedFile
+      lastPlayedFile: audioClip.currentSrc
     });
   });
 }
