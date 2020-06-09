@@ -3,6 +3,7 @@
 
 # Mindful
 
+<a href="https://www.producthunt.com/posts/mindful?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-mindful" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=204892&theme=light" alt="Mindful - Musical tones, visuals to improve focus & boost productivity | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
 
 This extension offers a range of musical tones of different frequencies and fullscreen animated visuals with every new tab and was made to improve focus and boost your productivity.
 The music is added keeping in mind that it will balance the inner energy chakras with its frequencies.
